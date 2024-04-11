@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation'
 import React, { ElementRef, useRef, useState, useEffect } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import UserItems from './user-items'
+import { useQuery } from 'convex/react'
+import { api } from '@/convex/_generated/api'
 
 const Navigation = () => {
     const pathName = usePathname();
@@ -17,6 +19,8 @@ const Navigation = () => {
     const [isResetting, setIsResetting] = useState(false)
 
     const [isCollapsed, setIsCollapsed] = useState(isMobile)
+
+    const documents = useQuery(api.documents.get)
 
     useEffect(() => {
         if (isMobile) {
@@ -125,7 +129,13 @@ const Navigation = () => {
                 </div>
 
                 <div className='mt-4'>
-                    <p>Documents</p>
+                    { documents &&
+                        documents?.map((document) => (
+                            <p key={document._id} >
+                                {document.title}
+                            </p>
+                        ))
+                    }
                 </div>
 
                 <div
