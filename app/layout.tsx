@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/themesProvider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +44,7 @@ export default function RootLayout({
             storageKey="jotion-theme-2"
           >
             {children}
+            <ToastContainer newestOnTop={true} position="bottom-center" pauseOnHover={false} autoClose={2000} />
           </ThemeProvider>
         </ConvexClientProvider>
       </body>
