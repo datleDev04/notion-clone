@@ -1,13 +1,16 @@
 "use client"
 
 import { cn } from '@/lib/utils'
-import { ChevronLeft, MenuIcon } from 'lucide-react'
+import { ChevronLeft, MenuIcon, PlusCircle, Search, Settings } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import React, { ElementRef, useRef, useState, useEffect } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import UserItems from './user-items'
-import { useQuery } from 'convex/react'
+import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
+import Item from './item'
+import { toast } from 'react-toastify'
+import DocumentList from './documentList'
 
 const Navigation = () => {
     const pathName = usePathname();
@@ -20,7 +23,7 @@ const Navigation = () => {
 
     const [isCollapsed, setIsCollapsed] = useState(isMobile)
 
-    const documents = useQuery(api.documents.get)
+    const create = useMutation(api.documents.create)
 
     useEffect(() => {
         if (isMobile) {
@@ -100,6 +103,21 @@ const Navigation = () => {
         }
     }
 
+    const handleCreate = async () => {
+        try {
+            // toast.info("Creating a new note...");
+            const result = await create({ title: "Untitled" });
+            
+            if ( result ) {
+              // toast.dismiss()
+              toast.success("Created a new note!");
+            } 
+      
+          } catch (error) {
+            toast.error("Failed to create a new note!");
+          }
+    }
+
     return (
         <>
             <aside
@@ -126,16 +144,26 @@ const Navigation = () => {
                 </div>
                 <div>
                     <UserItems />
+                    <Item 
+                        label='Search'
+                        onClick={() => {}}
+                        icon={Search}
+                        isSearch
+                    />
+                    <Item 
+                        label='Setting'
+                        onClick={() => {}}
+                        icon={Settings}
+                    />
+                    <Item 
+                        label='New Page'
+                        onClick={handleCreate}
+                        icon= {PlusCircle}
+                    />
                 </div>
 
                 <div className='mt-4'>
-                    { documents &&
-                        documents?.map((document) => (
-                            <p key={document._id} >
-                                {document.title}
-                            </p>
-                        ))
-                    }
+                    <DocumentList />
                 </div>
 
                 <div
