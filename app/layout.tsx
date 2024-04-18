@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/themesProvider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,6 +44,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="jotion-theme-2"
           >
+            <ModalProvider />
             {children}
             <ToastContainer newestOnTop={true} position="bottom-center" pauseOnHover={false} autoClose={2000} />
           </ThemeProvider>
