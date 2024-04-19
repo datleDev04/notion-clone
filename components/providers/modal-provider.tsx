@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import SettingModal from "../modals/SettingModal"
+import CoverImageModal from "../modals/cover-image-modal"
 
 export const ModalProvider = () => {
 
@@ -17,6 +18,7 @@ export const ModalProvider = () => {
     return (
         <>
             <SettingModal />
+            <CoverImageModal />
         </>
     )
 }

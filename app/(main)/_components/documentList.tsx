@@ -75,6 +75,7 @@ const DocumentList = ({
                         <Item
                             id={document._id}
                             label={document.title}
+                            documentIcon={document.icon}
                             icon={FileIcon}
                             onClick={() => onRedirect(document._id)}
                             active={params.id === document._id}
