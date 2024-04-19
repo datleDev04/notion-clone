@@ -40,9 +40,6 @@ const DocumentList = ({
     const onRedirect = (documentId: string) => {
         router.push(`/documents/${documentId}`)
     }
-    useEffect(() => {
-        console.log(documents, expanded)
-    }, [])
 
     if (documents == undefined) {
         return (
