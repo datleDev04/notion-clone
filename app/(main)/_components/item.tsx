@@ -73,8 +73,7 @@ const Item = ({
                     onExpand?.()
                 }
 
-                // router.push(`/document/${documentId}`)
-
+                router.push(`/documents/${documentId}`)
             })
             toast.promise(promise, {
                 pending: "Creating a new document...",
@@ -158,7 +157,7 @@ const Item = ({
                         <div
                             role='button'
                             className='opacity-0 group-hover:opacity-100 h-full ml-auto
-                            rounded-sm hover:bg-neutral-300 dark:hỏver:bg-neutral-700'
+                            rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-700'
                         >
                             <MoreHorizontal className='w-4 h-4 text-muted-foreground' />
                         </div>

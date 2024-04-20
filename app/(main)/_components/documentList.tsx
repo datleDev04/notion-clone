@@ -40,9 +40,6 @@ const DocumentList = ({
     const onRedirect = (documentId: string) => {
         router.push(`/documents/${documentId}`)
     }
-    useEffect(() => {
-        console.log(documents, expanded)
-    }, [])
 
     if (documents == undefined) {
         return (
@@ -78,6 +75,7 @@ const DocumentList = ({
                         <Item
                             id={document._id}
                             label={document.title}
+                            documentIcon={document.icon}
                             icon={FileIcon}
                             onClick={() => onRedirect(document._id)}
                             active={params.id === document._id}

@@ -7,7 +7,6 @@ import Navigation from './_components/navigation'
 import { redirect } from 'next/navigation'
 import SearchCommand from '@/components/search-command'
 
-
 const MainLayout = ({
     children
 }: {

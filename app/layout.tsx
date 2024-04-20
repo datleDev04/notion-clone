@@ -6,6 +6,7 @@ import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import { ModalProvider } from "@/components/providers/modal-provider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,17 +38,19 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning >
       <body className={inter.className}>
         <ConvexClientProvider >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="jotion-theme-2"
-          >
-            <ModalProvider />
-            {children}
-            <ToastContainer newestOnTop={true} position="bottom-center" pauseOnHover={false} autoClose={2000} />
-          </ThemeProvider>
+          <EdgeStoreProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="jotion-theme-2"
+            >
+              <ModalProvider />
+              {children}
+              <ToastContainer newestOnTop={true} position="bottom-center" pauseOnHover={false} autoClose={2000} />
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
       </body>
     </html>
