@@ -5,7 +5,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -51,8 +50,6 @@ const Menu = ({
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-60" align='end' alignOffset={8} forceMount>
-                <DropdownMenuLabel>Note's Settings</DropdownMenuLabel>
-                <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={onArchive}>
                     <Trash className='w-4 h-4 mr-2' />
                     Delete
