@@ -240,9 +240,9 @@ export const getById  = query({
             throw new Error("Not Found")
         }
 
-        // if(document.isPublished && !document.isArchived ){
-        //     return document
-        // }
+        if(document.isPublished && !document.isArchived ){
+            return document
+        }
         const userId = identity.subject
         
         if(document?.userId !== userId) {

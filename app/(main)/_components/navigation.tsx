@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import { ChevronLeft, MenuIcon, PlusCircle, PlusIcon, Search, Settings, TrashIcon } from 'lucide-react'
-import { useParams, usePathname } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import React, { ElementRef, useRef, useState, useEffect } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import UserItems from './user-items'
@@ -20,8 +20,9 @@ import TrashBox from './trashBox'
 import { useSearch } from '@/hooks/use-search'
 import { useSetting } from '@/hooks/use-setting'
 import SecondNavBar from './secondNavBar'
-const Navigation = () => {
+const Navigation = () => { 
 
+    const router = useRouter()
     const params = useParams()
     const pathName = usePathname();
     const isMobile = useMediaQuery("(max-width: 768px)")
@@ -48,7 +49,6 @@ const Navigation = () => {
         if (isMobile) {
             collapse();
         }
-        console.log(!!params.documentId)
         
 
     }, [pathName, isMobile]);
@@ -119,6 +119,10 @@ const Navigation = () => {
 
     const handleCreate = () => {
         const promise = create({ title: "Untitled" })
+            .then((documentId) => {
+                console.log(documentId)
+                router.push(`/documents/${documentId}`)
+            })
 
         toast.promise(promise, {
             pending: "Creating a new document...",

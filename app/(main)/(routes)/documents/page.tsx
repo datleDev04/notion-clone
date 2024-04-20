@@ -6,29 +6,30 @@ import { useUser } from "@clerk/clerk-react"
 import { useMutation } from "convex/react"
 import { PlusCircle } from "lucide-react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 
 
 const DocumentsPage = () => {
 
   const { user } = useUser()
+  const router = useRouter()
 
   const create = useMutation(api.documents.create)
 
-  const onCreate = async () => {
-    try {
-      // toast.info("Creating a new note...");
-      const result = await create({ title: "Untitled" });
-      
-      if ( result ) {
-        // toast.dismiss()
-        toast.success("Created a new note!");
-      } 
+  const handleCreate = () => {
+    const promise = create({ title: "Untitled" })
+        .then((documentId) => {
+            console.log(documentId)
+            router.push(`/documents/${documentId}`)
+        })
 
-    } catch (error) {
-      toast.error("Failed to create a new note!");
-    }
-  }
+    toast.promise(promise, {
+        pending: "Creating a new document...",
+        success: "Created a new document!",
+        error: "Failed to create a new document!"
+    })
+}
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center space-y-4 " >
@@ -50,7 +51,7 @@ const DocumentsPage = () => {
         Welcome to {user?.firstName}&apos;s Jotion
       </h2>
 
-      <Button onClick={onCreate} >
+      <Button onClick={handleCreate} >
         <PlusCircle className="w-4 h-4 mr-2" />
         Create a note
       </Button>
