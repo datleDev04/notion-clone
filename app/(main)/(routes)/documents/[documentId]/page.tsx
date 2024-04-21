@@ -59,10 +59,12 @@ const DocumentIdPage = ({
         <Cover urlImage={document.coverImage} />
         <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
             <ToolBar initialData={document} />
-            <Editor
-                onChange= {onChange}
-                initialContent = {document.content}
-            />
+            <div className=" relative " >
+                <Editor
+                    onChange= {onChange}
+                    initialContent = {document.content}
+                />
+            </div>
         </div>
     </div>
   )

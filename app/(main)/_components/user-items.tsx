@@ -3,6 +3,8 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { SignOutButton, useUser } from "@clerk/clerk-react"
 import { ChevronsLeftRight } from "lucide-react"
+import { useRouter } from "next/navigation"
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -13,6 +15,10 @@ import {
 const UserItems = () => {
 
     const { user } = useUser()
+    
+    const onSignOut = () => {
+        window.location.href = "/"
+    }
 
     return (
         <DropdownMenu>
@@ -54,7 +60,7 @@ const UserItems = () => {
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild className="w-full cursor-pointer text-muted-foreground">
-                    <SignOutButton>
+                    <SignOutButton signOutCallback={ onSignOut } >
                         Log out
                     </SignOutButton>
                 </DropdownMenuItem>
